@@ -64,3 +64,23 @@ Run the Mongo shell, with the Mongo daemon running in one terminal, type mongo i
 To exit the Mongo shell run quit()
 To stop the Mongo daemon hit ctrl-c
 
+I found there were some errors, which needed to be resolved:
+
+Error: The `brew link` step did not complete successfully
+The formula built, but is not symlinked into /usr/local
+Could not symlink bin/bsondump
+Target /usr/local/bin/bsondump
+already exists. You may want to remove it:
+  rm '/usr/local/bin/bsondump'
+
+To force the link and overwrite all conflicting files:
+  brew link --overwrite mongodb
+
+To list all files that would be deleted:
+  brew link --overwrite --dry-run mongodb
+
+Possible conflicting files are:
+/usr/local/bin/bsondump
+
+So I opted to force the link and overwrite all conflicting files. Subsequently, running mongod in one terminal and then mongo in another worked.
+
